@@ -40,6 +40,8 @@ def login_sequence(webbrowser, username, password):
     actions.click(elem_button)
     actions.perform()
 
+    return webbrowser
+
 def login_setting(webbrowser):
     """login setting check"""
     elem_button = WebDriverWait(webbrowser, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@class="cmbtv"]/button')))
@@ -47,6 +49,18 @@ def login_setting(webbrowser):
     actions.move_to_element(elem_button)
     actions.click(elem_button)
     actions.perform()
+
+    return webbrowser
+
+def notice_setting(webbrowser):
+    """notice setting check"""
+    elem_button = WebDriverWait(webbrowser, 10).until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div/div[3]/button[2]')))
+    actions = ActionChains(webbrowser)
+    actions.move_to_element(elem_button)
+    actions.click(elem_button)
+    actions.perform()
+
+    return webbrowser
 
 def alert_setting(webbrowser):
     """alert setting check"""
@@ -56,11 +70,15 @@ def alert_setting(webbrowser):
     actions.click(elem_button)
     actions.perform()
 
+    return webbrowser
+
 def click_good(webbrowser):
     """click good"""
-    for i in range(0, 7):
+    for i in range(1, 7):
         try:
-            elem_first_target = WebDriverWait(webbrowser, 10).until(EC.visibility_of_all_elements_located((By.XPATH, '//span[@class="fr66n"]')))[i]
+            button_path = '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/section/main/section/div/div[3]/div[1]/div/article[' + str(i) + ']/div/div[3]/div/div/section[1]/span[1]/button'
+            #elem_first_target = WebDriverWait(webbrowser, 10).until(EC.visibility_of_all_elements_located((By.XPATH, '//span[@class="_abl-"]')))[i]
+            elem_first_target = WebDriverWait(webbrowser, 3).until(EC.visibility_of_element_located((By.XPATH, button_path)))
             actions           = ActionChains(webbrowser)
             actions.move_to_element(elem_first_target)
             actions.click(elem_first_target)
@@ -109,21 +127,24 @@ def main():
     sleep(2) #Wait until the page opens
     
     #get element of username and password
-    login_sequence(webbrowser, username, password)
+    webbrowser = login_sequence(webbrowser, username, password)
     
     #login setting check
-    login_setting(webbrowser)
+    webbrowser = login_setting(webbrowser)
+
+    sleep(5)
+    #notice setting check
+    webbrowser = notice_setting(webbrowser)
     
+    sleep(5)
     #alert setting check
-    alert_setting(webbrowser)
+    #webbrowser = alert_setting(webbrowser)
     
-    sleep(10)
-    
+    sleep(5)
     #click good
     click_good(webbrowser)   
 
     sleep(5)    
-    
     webbrowser.close()
 
 if __name__ == "__main__":
