@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/bin/python3
 
 from re import I
 from tkinter import W
@@ -16,8 +16,7 @@ def get_webbrowser():
     """open google chrome"""
     #headless mode
     options = Options()
-    #uncomment this at headless mode
-    #options.add_argument('--headless')
+    options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument("--window-size=1920x1080")
     webbrowser = webdriver.Chrome(options=options)
@@ -135,7 +134,7 @@ def main():
 
     sleep(5)
     #notice setting check
-    webbrowser = notice_setting(webbrowser)
+    #webbrowser = notice_setting(webbrowser)
     
     sleep(5)
     #alert setting check
