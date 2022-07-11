@@ -45,7 +45,8 @@ def login_sequence(webbrowser, username, password):
 
 def login_setting(webbrowser):
     """login setting check"""
-    elem_button = WebDriverWait(webbrowser, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@class="cmbtv"]/button')))
+    #elem_button = WebDriverWait(webbrowser, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@class="cmbtv"]/button')))
+    elem_button = WebDriverWait(webbrowser, 10).until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/section/main/div/div/div/div/button')))
     actions = ActionChains(webbrowser)
     actions.move_to_element(elem_button)
     actions.click(elem_button)
@@ -75,9 +76,9 @@ def alert_setting(webbrowser):
 
 def click_good(webbrowser):
     """click good"""
-    for i in range(1, 7):
+    for i in range(1, 10):
         try:
-            button_path = '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/section/main/section/div/div[3]/div[1]/div/article[' + str(i) + ']/div/div[3]/div/div/section[1]/span[1]/button'
+            button_path = '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div/div[1]/div[1]/section/main/section/div/div[3]/div[1]/div/article[' + str(i) + ']/div/div[3]/div/div/section[1]/span[1]/button'
             #elem_first_target = WebDriverWait(webbrowser, 10).until(EC.visibility_of_all_elements_located((By.XPATH, '//span[@class="_abl-"]')))[i]
             elem_first_target = WebDriverWait(webbrowser, 3).until(EC.visibility_of_element_located((By.XPATH, button_path)))
             actions           = ActionChains(webbrowser)
